@@ -13,7 +13,7 @@ using file_text = std::vector<std::string>;
 using ip_address = std::string;
 using ip_key = uint64_t;
 using ip_vector = std::vector<uint8_t>;
-using ip_list = std::map<ip_key, ip_address>;
+using ip_list = std::multimap<ip_key, ip_address>;
 
 template<char delimiter>
 class StringDelimiter : public std::string
@@ -97,7 +97,8 @@ ip_list getIpList (const file_text &text)
         // std::cout << "key: " << key << std::endl;
         // <<< DEBUG
 
-        result[key] = ip;
+        // result[key] = ip;
+        result.insert(std::pair <ip_key, ip_address>(key, ip));
     }
 
     return result;
